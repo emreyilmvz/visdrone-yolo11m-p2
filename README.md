@@ -1,50 +1,51 @@
-# VisDrone İnsan Tespiti — YOLO11m-P2
+# VisDrone Human Detection with YOLO11m-P2
 
-Bu mezuniyet tezi projesi, drone görüntülerinde küçük insan/yaya nesnelerini tespit etmek için YOLO11m modeline P2 algılama başlığı ekler. Notebook, VisDrone-DET2019 verisini insan sınıfına dönüştürme, modeli eğitme, doğrulama ve ByteTrack ile video üzerinde izleme akışını sunar.
+This graduation thesis project adds a P2 detection head to YOLO11m to detect small people in drone imagery. The notebook demonstrates converting VisDrone-DET2019 annotations into a single human class, training and validating the model, and tracking detections in video with ByteTrack.
 
-## Sunum ve tekrar üretim
+**Türkçe:** [README.tr.md](README.tr.md) · **English notebook:** [visdrone-yolo11m-p2.en.ipynb](notebooks/visdrone-yolo11m-p2.en.ipynb) · **Türkçe notebook:** [visdrone-yolo11m-p2.ipynb](notebooks/visdrone-yolo11m-p2.ipynb)
 
-GitHub’da notebook’u sunum gibi okumak için [`notebooks/visdrone-yolo11m-p2.ipynb`](notebooks/visdrone-yolo11m-p2.ipynb) dosyasını açın. Notebook Colab odaklıdır; GPU ve Google Drive kurulum adımları içerir. Kişisel Colab bağlantısı ve kayıtlı hücre çıktıları temizlenmiştir. Proje yapılandırmaları ayrıca [`models/`](models/) ve [`data/`](data/) altındadır.
+## Notebook and reproduction
 
-Notebook en iyi deneyim için Colab GPU oturumu gerektirir. Veri kümesi otomatik olarak indirilmeye çalışılır; erişim ve veri kullanım koşulları veri sağlayıcısına bağlıdır.
+Open the [English notebook](notebooks/visdrone-yolo11m-p2.en.ipynb) to read the project as a presentation. It targets Google Colab and includes GPU and Google Drive setup steps. The personal Colab link and saved cell outputs have been removed. Model and dataset configurations are also provided under [`models/`](models/) and [`data/`](data/).
 
-## Son doğrulama sonuçları
+A Colab GPU runtime is recommended. The notebook attempts to download VisDrone; access and usage terms remain subject to the dataset provider's conditions.
 
-`results/val_results.json` dosyasındaki `best.pt` doğrulama ölçümleri (548 doğrulama görüntüsü):
+## Validation results
 
-| Metrik | Değer |
+These metrics were printed when `best.pt` was separately evaluated on 548 validation images and saved in [`results/val_results.json`](results/val_results.json):
+
+| Metric | Value |
 | --- | ---: |
 | Precision | 0.7642 |
 | Recall | 0.6207 |
 | mAP@50 | 0.6910 |
 | mAP@50–95 | 0.3278 |
 
-Bunlar test kümesi sonucu değildir. Eğitim günlüğü ve ara epoch metrikleri bu sunum taslağında yer almaz.
+These are validation metrics, not test-set results. The training log and per-epoch metrics are omitted from this presentation draft.
 
-![Eğitim sonuçları](results/results.png)
+![Training results](results/results.png)
 
-![Normalize edilmiş karışıklık matrisi](results/confusion_matrix_normalized.png)
+![Normalized confusion matrix](results/confusion_matrix_normalized.png)
 
-## Depo içeriği
+## Repository contents
 
-- `notebooks/`: açıklamalı Colab notebook’u
-- `models/yolo11m-p2.yaml`: P2–P5 model mimarisi
-- `data/visdrone-human.yaml`: tek sınıflı veri kümesi ayarı
-- `results/`: doğrulama JSON’u ve grafikler
+- `notebooks/`: English and Turkish Colab notebooks
+- `models/yolo11m-p2.yaml`: P2–P5 model architecture
+- `data/visdrone-human.yaml`: single-class dataset configuration
+- `results/`: validation JSON and plots
 
-Model ağırlıkları, veri kümesi, eğitim örnek görselleri ve video dosyaları depoya eklenmemiştir. Büyük ağırlıkları Git’e koymak yerine notebook’taki eğitim adımlarını kullanın.
+The dataset, model weights, training sample images, and video files are not included. Use the notebook's training steps to produce weights locally.
 
-## Lisanslar
+## Licensing
 
-Bu depodaki kaynak kod için **AGPL-3.0-only** işaretlemesi kullandım; gerekçesi ve üçüncü taraf bildirimleri [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) dosyasında. Tam metin için [`LICENSE`](LICENSE) içindeki GNU bağlantısına bakın.
+The source code is licensed under **AGPL-3.0-only**. The full license is in [`LICENSE`](LICENSE); third-party terms and notices are in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
 
-VisDrone-DET2019 veri kümesi depoda değildir ve bu kod lisansı veri kümesine izin vermez. [Ultralytics’in VisDrone veri kümesi dokümanı](https://docs.ultralytics.com/tr/datasets/detect/visdrone) VisDrone2019-DET kaynağını ve indirme/dönüştürme akışını belgeliyor; sayfada lisans alanı “No license” olarak işaretlenmiş. [Dataset Ninja](https://datasetninja.com/vis-drone-2019-det) “publicly available” dese de kendi uyarısında hak iddiasında bulunmadığını ve kullanım izinlerini asıl kaynaktan kontrol etmenin kullanıcı sorumluluğunda olduğunu söylüyor. Bu nedenle bu sayfalar yeniden dağıtım lisansı sağlamıyor. Resmi 2019 deposunda da README düzeyinde lisans belirtilmediğinden, veri sağlayıcısından 2019 sürümü için geçerli şartları teyit edin. VisDrone2021 için yayımlanmış koşulları 2019 sürümüne otomatik olarak uygulamayın.
+The VisDrone-DET2019 dataset is not included, and this code license does not grant rights to the dataset. [Ultralytics' VisDrone documentation](https://docs.ultralytics.com/tr/datasets/detect/visdrone) documents the dataset source and download/conversion process, but labels its license field “No license.” [Dataset Ninja](https://datasetninja.com/vis-drone-2019-det) calls the dataset publicly available, while its disclaimer says it claims no rights and places license checks on the user. Neither page grants redistribution rights. The official 2019 repository README also does not specify a license; confirm the terms for this release with the dataset provider. Do not assume VisDrone2021 terms apply to VisDrone2019.
 
+## Citation
 
-## Atıf
-
-VisDrone-DET2019 için şu çalışmaya atıf verin:
+Please cite the VisDrone-DET2019 paper:
 
 > Zhu, Pengfei, et al. “Detection and Tracking Meet Drones Challenge.” *IEEE Transactions on Pattern Analysis and Machine Intelligence*, vol. 44, no. 11, 2022, pp. 7380–7399. DOI: [10.1109/TPAMI.2021.3119563](https://doi.org/10.1109/TPAMI.2021.3119563).
 
-Atıf, veri kümesini kullanma veya yeniden dağıtma izni yerine geçmez.
+Citation does not replace permission to use or redistribute the dataset.
