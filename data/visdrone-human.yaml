@@ -1,0 +1,7 @@
+# Download VisDrone2019-DET separately; see README for source and terms.
+path: ../datasets/VisDrone
+train: VisDrone2019-DET-train/images
+val: VisDrone2019-DET-val/images
+nc: 1
+names:
+  0: Human

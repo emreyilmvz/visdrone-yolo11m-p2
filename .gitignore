@@ -1,0 +1,20 @@
+# Secrets, datasets, model checkpoints and local media
+datasets/
+*.pt
+*.onnx
+*.engine
+*.mp4
+runs/
+
+# Python / notebook environment files
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# IDE / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
